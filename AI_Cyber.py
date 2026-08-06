@@ -45,7 +45,7 @@ def analyze(text):
 
 
     prompt = f"""
-You are TruthLens AI, an expert cybersecurity assistant that detects deepfakes, scams, phishing, fake news, impersonation, and digital fraud.
+You are AI Cyber Lens, an expert cybersecurity assistant that detects deepfakes, scams, phishing, fake news, impersonation, and digital fraud.
 
 Analyze the following content.
 
@@ -232,7 +232,7 @@ if st.button("🔍 Analyze Information"):
     elif not content:
 
         st.warning(
-            "Enter text or upload PDF"
+            "Please enter text, URL, upload a PDF, or upload an image."
         )
 
 
@@ -258,12 +258,12 @@ if 'result' in locals():
     st.download_button(
         label="📄 Download Report",
         data=result,
-        file_name="TruthLens_Report.txt",
+        file_name="AI_CyberLens_Report.txt",
         mime="text/plain"
     )
 
 st.divider()
 
 st.caption(
-    "AI Truth Lens | Python + Streamlit + Groq AI"
+    "AI Cyber Lens | Python + Streamlit + Groq AI"
 )
