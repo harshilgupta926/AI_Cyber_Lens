@@ -7,11 +7,17 @@ import streamlit as st
 from groq import Groq
 from pypdf import PdfReader
 
-st.set_page_config(
-    page_title="AI Cyber Lens",
-    page_icon="🛡️",
-    layout="wide",
-)
+with st.sidebar.expander("🔑 Groq API Configuration", expanded=True):
+    st.info("Your API key is only used for this session.")
+    
+    api_key = st.text_input(
+        "Groq API Key",
+        type="password",
+        placeholder="gsk_************************"
+    )
+
+    if api_key:
+        st.success("✅ API Key Loaded")
 
 # ---------- Custom CSS ----------
 st.markdown("""
