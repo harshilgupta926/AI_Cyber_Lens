@@ -22,6 +22,22 @@ api_key = st.sidebar.text_input(
     type="password"
 )
 
+st.sidebar.divider()
+
+user_profile = st.sidebar.selectbox(
+    "Who are you?",
+    [
+        "Student",
+        "Senior Citizen",
+        "Working Professional",
+        "Business Owner",
+        "Parent",
+        "Government Employee",
+        "Other"
+    ]
+)
+
+
 
 
 def read_pdf(file):
@@ -45,18 +61,32 @@ def analyze(text):
 
 
     prompt = f"""
-You are AI Cyber Lens, an expert cybersecurity assistant that detects deepfakes, scams, phishing, fake news, impersonation, and digital fraud.
+You are AI Cyber Lens, an advanced AI-powered cybersecurity assistant that detects deepfakes, scams, phishing, fake news, impersonation, fraud, malware, spam, and other digital threats.
+
+User Profile:
+{user_profile}
+
+Your goal is not only to determine whether content is safe or dangerous, but also to explain how risky it is for the selected user profile.
 
 Analyze the following content.
 
 CONTENT:
 {text}
 
+Use a Threat Correlation Engine:
+Instead of analyzing each indicator separately, correlate all available evidence (language patterns, URLs, impersonation attempts, phishing signs, scam tactics, misinformation, social engineering techniques, and suspicious claims) to determine the overall cyber threat level.
+
+Never rely on only one indicator.
+Your final verdict must be based on the combined evidence.
+
 Return ONLY the report in markdown.
 
-# 🛡️ TruthLens Security Report
+# 🛡️ AI Cyber Lens Security Report
+
+---
 
 ## 🚨 Executive Summary
+
 Summarize the content in 2–3 sentences.
 
 ---
@@ -66,17 +96,19 @@ Summarize the content in 2–3 sentences.
 Choose all that apply:
 
 - Safe Content
-- Deepfake
 - Scam
 - Phishing
+- Deepfake
 - Fake News
 - Impersonation
 - Fraud
 - Spam
+- Malware
+- Social Engineering
 
 ---
 
-## 🏁 Verdict
+## 🏁 Final Verdict
 
 Choose ONLY one:
 
@@ -88,13 +120,90 @@ Choose ONLY one:
 
 **Confidence:** XX%
 
-Give a brief reason.
+Explain your verdict in 2-3 lines.
 
 ---
 
 ## ⭐ AI Trust Score
 
-Give a score out of **100** with one-line justification.
+Give a Trust Score out of 100.
+
+Explain the score in one sentence.
+
+---
+
+## 🎯 Personalized Risk Intelligence
+
+**Target Audience:** {user_profile}
+
+**Risk Meter:** XX%
+
+Choose ONLY one:
+
+🟢 LOW RISK
+
+🟡 MEDIUM RISK
+
+🔴 HIGH RISK
+
+Explain why this content is specifically risky (or safe) for the selected user profile.
+
+For example:
+
+Student:
+- Fake internships
+- Fake scholarships
+- Placement scams
+- Telegram investment scams
+- Fake coding bootcamps
+
+Senior Citizen:
+- OTP fraud
+- Bank KYC scam
+- Lottery scam
+- Pension fraud
+- Voice cloning
+
+Working Professional:
+- Fake HR
+- CEO impersonation
+- Salary phishing
+- Invoice fraud
+- Teams/Zoom phishing
+
+Business Owner:
+- GST fraud
+- Fake vendor
+- Invoice manipulation
+- Fake payment request
+- UPI fraud
+
+Parent:
+- School fee scam
+- Child emergency scam
+- Deepfake voice
+- Fake donation
+
+Government Employee:
+- Official notice impersonation
+- Fake government portal
+- Credential phishing
+- Email spoofing
+
+Other:
+Provide general cyber safety analysis.
+
+---
+
+## 🔗 Threat Correlation Engine
+
+Correlate all detected indicators.
+
+Explain how multiple threats combine to produce the final verdict.
+
+If only one weak indicator exists, mention that the risk is limited.
+
+If several indicators reinforce each other, explain why the overall threat is high.
 
 ---
 
@@ -108,22 +217,26 @@ Give a score out of **100** with one-line justification.
 | Fake Information | ✅ / ❌ |
 | Suspicious Links | ✅ / ❌ |
 | Impersonation | ✅ / ❌ |
+| Malware Indicators | ✅ / ❌ |
+| Social Engineering | ✅ / ❌ |
 
 ---
 
 ## ⚠ Key Risk Indicators
 
-List the main warning signs.
+List the major warning signs.
 
-If none are found, write:
+If none exist, write:
 
 **No significant threats detected.**
 
 ---
 
-## 🛡 Safety Recommendations
+## 🛡 Personalized Safety Recommendations
 
-Provide 3–5 practical recommendations.
+Provide 3–5 recommendations specifically for the selected user profile.
+
+The advice must be practical and tailored to the user's likely cyber risks.
 
 ---
 
@@ -135,6 +248,7 @@ Return a markdown table.
 |--------|---------|------------------|
 
 Recommend ONLY relevant official sources such as:
+
 - CERT-In
 - National Cyber Crime Portal
 - PIB Fact Check
@@ -147,7 +261,13 @@ Never invent websites or URLs.
 
 ## 💡 Final Conclusion
 
-Write a concise 3–4 line conclusion explaining the verdict and what the user should do next.
+Summarize:
+
+- Overall threat level
+- Why the AI reached this verdict
+- What the selected user should do next
+
+Keep it concise (3–4 lines).
 
 Return ONLY markdown.
 """
