@@ -3,29 +3,184 @@ from groq import Groq
 from pypdf import PdfReader
 
 
+import streamlit as st
+from groq import Groq
+from pypdf import PdfReader
+
 st.set_page_config(
     page_title="AI Cyber Lens",
     page_icon="🛡️",
-    layout="centered"
+    layout="wide",
 )
 
-st.title("🛡️ AI Cyber Lens")
+# ---------- Custom CSS ----------
+st.markdown("""
+<style>
 
-st.subheader("Detect Deepfakes, Scams & Digital Threats with AI")
+.stApp{
+    background: linear-gradient(135deg,#07111f,#0b1f3a,#12294d);
+}
 
-st.write(
-    "An AI-powered cybersecurity platform that analyzes text, URLs, PDFs, and images to detect deepfakes, phishing, scams, fake news, and other digital threats."
+/* Hide Streamlit Menu */
+#MainMenu {visibility:hidden;}
+footer {visibility:hidden;}
+header {visibility:hidden;}
+
+/* Main Title */
+.title{
+    text-align:center;
+    font-size:52px;
+    font-weight:800;
+    color:white;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    text-align:center;
+    font-size:22px;
+    color:#8ec5ff;
+    margin-bottom:25px;
+}
+
+.desc{
+    text-align:center;
+    color:#d6d6d6;
+    font-size:18px;
+    margin-bottom:35px;
+}
+
+/* Cards */
+.card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:22px;
+    text-align:center;
+    transition:0.3s;
+    box-shadow:0px 8px 25px rgba(0,0,0,0.25);
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border:1px solid #3b82f6;
+}
+
+/* Sidebar */
+
+section[data-testid="stSidebar"]{
+    background:#071827;
+}
+
+/* Buttons */
+
+.stButton>button{
+    width:100%;
+    border-radius:12px;
+    height:52px;
+    border:none;
+    color:white;
+    background:linear-gradient(90deg,#2563EB,#06B6D4);
+    font-weight:bold;
+    font-size:17px;
+}
+
+.stButton>button:hover{
+    transform:scale(1.02);
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ---------- Hero ----------
+
+st.markdown(
+"""
+<div class="title">
+🛡️ AI Cyber Lens
+</div>
+
+<div class="subtitle">
+AI Powered Cybersecurity Platform
+</div>
+
+<div class="desc">
+Detect phishing, scams, deepfakes, fake news, malicious URLs,
+QR codes, suspicious emails and PDF threats using AI.
+</div>
+""",
+unsafe_allow_html=True
 )
+
+# ---------- Feature Cards ----------
+
+c1,c2,c3 = st.columns(3)
+
+with c1:
+    st.markdown("""
+    <div class="card">
+    <h3>📝 Text Scanner</h3>
+    Detect scams and phishing messages.
+    </div>
+    """,unsafe_allow_html=True)
+
+with c2:
+    st.markdown("""
+    <div class="card">
+    <h3>🌐 URL Scanner</h3>
+    Detect malicious and phishing websites.
+    </div>
+    """,unsafe_allow_html=True)
+
+with c3:
+    st.markdown("""
+    <div class="card">
+    <h3>🖼 Image Scanner</h3>
+    Analyze screenshots and suspicious images.
+    </div>
+    """,unsafe_allow_html=True)
+
+c4,c5,c6 = st.columns(3)
+
+with c4:
+    st.markdown("""
+    <div class="card">
+    <h3>📧 Email Scanner</h3>
+    Detect fraudulent emails.
+    </div>
+    """,unsafe_allow_html=True)
+
+with c5:
+    st.markdown("""
+    <div class="card">
+    <h3>📄 PDF Scanner</h3>
+    Analyze uploaded documents.
+    </div>
+    """,unsafe_allow_html=True)
+
+with c6:
+    st.markdown("""
+    <div class="card">
+    <h3>🔳 QR Scanner</h3>
+    Detect dangerous QR codes.
+    </div>
+    """,unsafe_allow_html=True)
+
+st.divider()
+
+# ---------- Sidebar ----------
+
+st.sidebar.title("⚙️ Settings")
 
 api_key = st.sidebar.text_input(
-    "Enter Groq API Key",
+    "🔑 Groq API Key",
     type="password"
 )
 
 st.sidebar.divider()
 
 user_profile = st.sidebar.selectbox(
-    "Who are you?",
+    "👤 Who are you?",
     [
         "Student",
         "Senior Citizen",
@@ -36,6 +191,8 @@ user_profile = st.sidebar.selectbox(
         "Other"
     ]
 )
+
+st.sidebar.success("🛡️ Privacy First")
 
 
 
