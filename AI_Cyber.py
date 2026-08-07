@@ -3,21 +3,12 @@ from groq import Groq
 from pypdf import PdfReader
 
 
-import streamlit as st
-from groq import Groq
-from pypdf import PdfReader
+api_key = st.sidebar.text_input(
+    "Enter Groq API Key",
+    type="password"
+)
 
-with st.sidebar.expander("🔑 Groq API Configuration", expanded=True):
-    st.info("Your API key is only used for this session.")
-    
-    api_key = st.text_input(
-        "Groq API Key",
-        type="password",
-        placeholder="gsk_************************"
-    )
-
-    if api_key:
-        st.success("✅ API Key Loaded")
+st.sidebar.divider()
 
 # ---------- Custom CSS ----------
 st.markdown("""
