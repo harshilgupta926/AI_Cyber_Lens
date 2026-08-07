@@ -21,7 +21,7 @@ st.markdown("""
 /* Hide Streamlit Menu */
 #MainMenu {visibility:hidden;}
 footer {visibility:hidden;}
-header {visibility:hidden;}
+
 
 /* Main Title */
 .title{
