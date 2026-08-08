@@ -3,165 +3,143 @@ from groq import Groq
 from pypdf import PdfReader
 
 
-api_key = st.sidebar.text_input(
-    "Enter Groq API Key",
-    type="password"
-)
-
 st.sidebar.divider()
 
 # ---------- Custom CSS ----------
 st.markdown("""
 <style>
 
-.stApp{
+.stApp {
     background: linear-gradient(135deg,#07111f,#0b1f3a,#12294d);
 }
 
-/* Hide Streamlit Menu */
-#MainMenu {visibility:hidden;}
-footer {visibility:hidden;}
-
-
-/* Main Title */
-.title{
-    text-align:center;
-    font-size:52px;
-    font-weight:800;
-    color:white;
-    margin-bottom:5px;
+/* Feature cards */
+.feature-card {
+    height: 235px;
+    box-sizing: border-box;
+    padding: 30px 20px;
+    border-radius: 25px;
+    background: rgba(30,50,78,0.75);
+    border: 1px solid rgba(255,255,255,0.10);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.subtitle{
-    text-align:center;
-    font-size:22px;
-    color:#8ec5ff;
-    margin-bottom:25px;
+.feature-title {
+    color: white !important;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 20px;
 }
 
-.desc{
-    text-align:center;
-    color:#d6d6d6;
-    font-size:18px;
-    margin-bottom:35px;
+.feature-description {
+    color: white !important;
+    font-size: 20px;
+    line-height: 1.6;
 }
 
-/* Cards */
-.card{
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:18px;
-    padding:22px;
-    text-align:center;
-    transition:0.3s;
-    box-shadow:0px 8px 25px rgba(0,0,0,0.25);
+/* Mobile text visibility fix */
+.stRadio label,
+.stRadio p,
+.stTextArea label,
+.stTextInput label {
+    color: white !important;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    border:1px solid #3b82f6;
+textarea::placeholder {
+    color: #6b7280 !important;
 }
 
-/* Sidebar */
+/* Mobile card sizing */
+@media (max-width: 768px) {
+    .feature-card {
+        height: 220px;
+        padding: 20px 15px;
+    }
 
-section[data-testid="stSidebar"]{
-    background:#071827;
-}
+    .feature-title {
+        font-size: 24px;
+    }
 
-/* Buttons */
-
-.stButton>button{
-    width:100%;
-    border-radius:12px;
-    height:52px;
-    border:none;
-    color:white;
-    background:linear-gradient(90deg,#2563EB,#06B6D4);
-    font-weight:bold;
-    font-size:17px;
-}
-
-.stButton>button:hover{
-    transform:scale(1.02);
+    .feature-description {
+        font-size: 16px;
+    }
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- Hero ----------
-
-st.markdown(
-"""
-<div class="title">
-🛡️ AI Cyber Lens
-</div>
-
-<div class="subtitle">
-AI Powered Cybersecurity Platform
-</div>
-
-<div class="desc">
-Detect phishing, scams, deepfakes, fake news, malicious URLs,
-QR codes, suspicious emails and PDF threats using AI.
-</div>
-""",
-unsafe_allow_html=True
-)
 
 # ---------- Feature Cards ----------
 
-c1,c2,c3 = st.columns(3)
+c1, c2, c3 = st.columns(3)
 
 with c1:
     st.markdown("""
-    <div class="card">
-    <h3>📝 Text Scanner</h3>
-    Detect scams and phishing messages.
+    <div class="feature-card">
+        <div class="feature-title">📝 Text Scanner</div>
+        <div class="feature-description">
+            Detect scams and phishing messages.
+        </div>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 with c2:
     st.markdown("""
-    <div class="card">
-    <h3>🌐 URL Scanner</h3>
-    Detect malicious and phishing websites.
+    <div class="feature-card">
+        <div class="feature-title">🌐 URL Scanner</div>
+        <div class="feature-description">
+            Detect malicious and phishing websites.
+        </div>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 with c3:
     st.markdown("""
-    <div class="card">
-    <h3>🖼 Image Scanner</h3>
-    Analyze screenshots and suspicious images.
+    <div class="feature-card">
+        <div class="feature-title">🖼️ Image Scanner</div>
+        <div class="feature-description">
+            Analyze screenshots and suspicious images.
+        </div>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-c4,c5,c6 = st.columns(3)
+
+c4, c5, c6 = st.columns(3)
 
 with c4:
     st.markdown("""
-    <div class="card">
-    <h3>📧 Email Scanner</h3>
-    Detect fraudulent emails.
+    <div class="feature-card">
+        <div class="feature-title">📧 Email Scanner</div>
+        <div class="feature-description">
+            Detect fraudulent emails.
+        </div>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 with c5:
     st.markdown("""
-    <div class="card">
-    <h3>📄 PDF Scanner</h3>
-    Analyze uploaded documents.
+    <div class="feature-card">
+        <div class="feature-title">📄 PDF Scanner</div>
+        <div class="feature-description">
+            Analyze uploaded documents.
+        </div>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 with c6:
     st.markdown("""
-    <div class="card">
-    <h3>🔳 QR Scanner</h3>
-    Detect dangerous QR codes.
+    <div class="feature-card">
+        <div class="feature-title">🔳 QR Scanner</div>
+        <div class="feature-description">
+            Detect dangerous QR codes.
+        </div>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 st.divider()
 
