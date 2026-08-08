@@ -13,12 +13,13 @@ st.markdown("""
     background: linear-gradient(135deg,#07111f,#0b1f3a,#12294d);
 }
 
-/* Feature cards */
+/* ---------- Feature Cards ---------- */
+
 .feature-card {
-    height: 235px;
+    height: 190px;
     box-sizing: border-box;
-    padding: 30px 20px;
-    border-radius: 25px;
+    padding: 22px 18px;
+    border-radius: 20px;
     background: rgba(30,50,78,0.75);
     border: 1px solid rgba(255,255,255,0.10);
     text-align: center;
@@ -30,19 +31,21 @@ st.markdown("""
 
 .feature-title {
     color: white !important;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 700;
-    line-height: 1.25;
-    margin-bottom: 20px;
+    line-height: 1.3;
+    margin-bottom: 12px;
 }
 
 .feature-description {
-    color: white !important;
-    font-size: 20px;
-    line-height: 1.6;
+    color: #dbe5f2 !important;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 220px;
 }
 
-/* Mobile text visibility fix */
+/* Mobile text fix */
+
 .stRadio label,
 .stRadio p,
 .stTextArea label,
@@ -54,19 +57,29 @@ textarea::placeholder {
     color: #6b7280 !important;
 }
 
-/* Mobile card sizing */
+/* ---------- Space between cards ---------- */
+
+div[data-testid="column"] {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* ---------- Mobile ---------- */
+
 @media (max-width: 768px) {
+
     .feature-card {
-        height: 220px;
-        padding: 20px 15px;
+        height: 175px;
+        padding: 18px 12px;
     }
 
     .feature-title {
-        font-size: 24px;
+        font-size: 18px;
+        margin-bottom: 10px;
     }
 
     .feature-description {
-        font-size: 16px;
+        font-size: 13px;
     }
 }
 
@@ -107,7 +120,6 @@ with c3:
         </div>
     </div>
     """, unsafe_allow_html=True)
-
 
 c4, c5, c6 = st.columns(3)
 
