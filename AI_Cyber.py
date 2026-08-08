@@ -6,11 +6,38 @@ from pypdf import PdfReader
 st.sidebar.divider()
 
 # ---------- Custom CSS ----------
+# ---------- Custom CSS ----------
+
 st.markdown("""
 <style>
 
 .stApp {
     background: linear-gradient(135deg,#07111f,#0b1f3a,#12294d);
+}
+
+/* ---------- Header ---------- */
+
+.hero {
+    text-align: center;
+    padding: 30px 20px 35px 20px;
+}
+
+.hero-title {
+    color: white !important;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle {
+    color: #dbeafe !important;
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.hero-description {
+    color: #b8c7dc !important;
+    font-size: 14px;
 }
 
 /* ---------- Feature Cards ---------- */
@@ -23,6 +50,7 @@ st.markdown("""
     background: rgba(30,50,78,0.75);
     border: 1px solid rgba(255,255,255,0.10);
     text-align: center;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,7 +72,14 @@ st.markdown("""
     max-width: 220px;
 }
 
-/* Mobile text fix */
+/* Space between cards */
+
+div[data-testid="column"] {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Mobile text visibility */
 
 .stRadio label,
 .stRadio p,
@@ -57,16 +92,25 @@ textarea::placeholder {
     color: #6b7280 !important;
 }
 
-/* ---------- Space between cards ---------- */
-
-div[data-testid="column"] {
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-/* ---------- Mobile ---------- */
+/* Mobile */
 
 @media (max-width: 768px) {
+
+    .hero {
+        padding: 25px 15px 30px 15px;
+    }
+
+    .hero-title {
+        font-size: 30px;
+    }
+
+    .hero-subtitle {
+        font-size: 17px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
 
     .feature-card {
         height: 175px;
@@ -75,7 +119,6 @@ div[data-testid="column"] {
 
     .feature-title {
         font-size: 18px;
-        margin-bottom: 10px;
     }
 
     .feature-description {
@@ -84,6 +127,21 @@ div[data-testid="column"] {
 }
 
 </style>
+""", unsafe_allow_html=True)
+
+
+# ---------- Hero ----------
+
+st.markdown("""
+<div class="hero">
+    <div class="hero-title">🛡️ AI Cyber Lens</div>
+    <div class="hero-subtitle">
+        Detect Deepfakes, Scams & Digital Threats with AI
+    </div>
+    <div class="hero-description">
+        Analyze suspicious messages, websites, images, emails, documents and QR codes.
+    </div>
+</div>
 """, unsafe_allow_html=True)
 
 
@@ -120,6 +178,7 @@ with c3:
         </div>
     </div>
     """, unsafe_allow_html=True)
+
 
 c4, c5, c6 = st.columns(3)
 
